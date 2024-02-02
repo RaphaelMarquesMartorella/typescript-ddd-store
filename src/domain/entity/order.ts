@@ -1,3 +1,4 @@
+import OrderItemModel from "../../infrastructure/db/sequelize/model/order_item.model";
 import OrderItem from "./order_item";
 
 
@@ -40,6 +41,11 @@ export default class Order {
     return true;
   }
 
+  changeItems(items: OrderItem[]): void {
+    this._items = items;
+    this._total = this.total();
+  }
+  
   total(): number {
     return this._items.reduce((acc, item) => acc + item.total(), 0);
   }

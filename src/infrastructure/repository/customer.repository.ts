@@ -7,7 +7,7 @@ export default class CustomerRepository implements CustomerRepositoryInterface {
     async create(entity: Customer): Promise<void> {
       await CustomerModel.create({
         id: entity.id,
-        name: entity.name,
+        name: entity.name, 
         street: entity.Address.street,
         number: entity.Address.number,
         zipcode: entity.Address.zip,

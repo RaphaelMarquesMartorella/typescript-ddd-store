@@ -15,7 +15,7 @@ describe("Customer repository test", () => {
       sync: { force: true },
     });
 
-    sequelize.addModels([CustomerModel]);
+    await sequelize.addModels([CustomerModel]);
     await sequelize.sync();
   });
 
@@ -57,7 +57,7 @@ describe("Customer repository test", () => {
 
     expect(customerModel.toJSON()).toStrictEqual({
       id: "123",
-      name: customer.name,
+      name: "Customer 2",
       active: customer.isActive(),
       rewardPoints: customer.rewardPoints,
       street: address.street,

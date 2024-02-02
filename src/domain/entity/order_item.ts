@@ -30,6 +30,10 @@ export default class OrderItem {
     get price(): number {
       return this._price;
     }
+
+    changeProductName(name: string) {
+      this._name = name;
+    }
   
     total(): number {
       return this._price * this._quantity
