@@ -3,6 +3,7 @@ import OrderItemModel from "../db/sequelize/model/order_item.model";
 import OrderModel from "../db/sequelize/model/order.model";
 import OrderRepositoryInterface from "../../domain/repository/order.repository.interface";
 import OrderItem from "../../domain/entity/order_item";
+import { or } from "sequelize";
 
 export default class OrderRepository implements OrderRepositoryInterface {
   async create(entity: Order): Promise<void> {
@@ -74,17 +75,21 @@ export default class OrderRepository implements OrderRepositoryInterface {
   };
   
   async findAll(): Promise<Order[]> {
-    const orderModels = await OrderModel.findAll({ include: [OrderItemModel] });
-    let orders: Order[] = [];
-    orderModels.forEach(orderModel => {
-      let orderItems: OrderItem[] = [];
-      orderModel.items.forEach(item => {
-        let orderItem = new OrderItem(item.id, item.name, item.price, item.product_id, item.quantity);
-        orderItems.push(orderItem)      
+    let orderModels;
+
+    try {
+      orderModels = await OrderModel.findAll({ include: [OrderItemModel]});
+    } catch (error) {
+      throw new Error("Could not get orders");
+    }
+
+    let OrderEntityArray: Order[] = [];
+    let OrderItemEntityArray: OrderItem[] = [];
+      orderModels.forEach(orders => {
+      orders.items.forEach(orderItems => {
+        OrderItemEntityArray.push(new OrderItem(orderItems.id, orderItems.name, orderItems.price, orderItems.product_id, orderItems.quantity))
       });
-      let order = new Order(orderModel.id, orderModel.customer_id, orderItems);
-      orders.push(order);
+      OrderEntityArray.push(new Order(orders.id, orders.customer_id, OrderItemEntityArray))
     });
-    return orders;
-  }
-}
+      return OrderEntityArray;
+}}
