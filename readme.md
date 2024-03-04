@@ -38,6 +38,8 @@ If you encounter any problems, please open an issue in the GitHub repository.
 
 Raphael Martorella 
 raphael.martorella@homail.com
+Linkedin
+https://www.linkedin.com/in/raphael-marques-martorella/
 
 This project was initially created as part of a class from Plataforma Full Cycle. I have since expanded on the original work by adding several features of my own.
 
