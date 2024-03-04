@@ -37,7 +37,7 @@ If you encounter any problems, please open an issue in the GitHub repository.
 ## Contact
 
 Raphael Martorella 
-raphael.martorella@homail.com
+raphael.martorella@homail.com </br>
 Linkedin
 https://www.linkedin.com/in/raphael-marques-martorella/
 
